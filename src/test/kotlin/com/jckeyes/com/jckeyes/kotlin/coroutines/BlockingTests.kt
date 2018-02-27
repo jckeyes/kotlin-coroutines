@@ -4,7 +4,7 @@ package com.jckeyes.com.jckeyes.kotlin.coroutines
 
 import com.jckeyes.com.jckeyes.kotlin.common.CommonPoolWatcher
 import com.jckeyes.com.jckeyes.kotlin.common.TestOutputFormatter
-import com.jckeyes.kotlin.coroutines.log
+import com.jckeyes.com.jckeyes.kotlin.common.log
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
@@ -75,17 +75,17 @@ class BlockingTests {
 
     // Rockets launch, just like coroutines
     private fun start() {
-        log("\uD83D\uDE80")
+        log("🚀")
     }
 
     // The universal sign for finish
     private fun end() {
-        log("\uD83C\uDFC1")
+        log("🏁")
     }
 
     // The culmination of years of work by dozens
     // of PhD students
     private fun mineBits() {
-        log((0..10000000).map { "\uD83D\uDD28" }.last())
+        log((0..10000000).map { "🔨" }.last())
     }
 }

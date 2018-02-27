@@ -2,14 +2,13 @@
 
 package com.jckeyes.com.jckeyes.kotlin.coroutines
 
-import com.jckeyes.com.jckeyes.kotlin.common.TestOutputFormatter
-import com.jckeyes.com.jckeyes.kotlin.common.getRandom
-import com.jckeyes.kotlin.coroutines.log
+import com.jckeyes.com.jckeyes.kotlin.common.*
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.io.File
+import java.lang.Thread.sleep
 import java.util.concurrent.CompletableFuture
 import kotlin.concurrent.thread
 
@@ -61,9 +60,12 @@ class AsyncTests {
 
     // All the kids are talking about it
     private fun randomoji(): String {
-        Thread.sleep(1000)
-        return File(emojis).readText().split("\n").getRandom()
-    }
+        val emojiPath = this.javaClass.getResource("/emojis.txt").path
+        val emoji = File(emojiPath).readText().split("\n").getRandom()
 
-    private val emojis = "/Users/john.keyes/Development/Sandbox/kotlin-coroutines-introduction/words/emojis.txt"
+        sleep(1000)
+        log(emoji)
+
+        return emoji
+    }
 }

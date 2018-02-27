@@ -3,7 +3,6 @@ package com.jckeyes.com.jckeyes.kotlin.common
 import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
-import java.util.*
 import java.util.concurrent.ForkJoinPool
 
 class CommonPoolWatcher : AfterEachCallback {
@@ -31,10 +30,3 @@ class TestOutputFormatter : BeforeEachCallback, AfterEachCallback {
 
     private fun ExtensionContext.formatForTitle() = this.displayName.trim('(', ')').toUpperCase()
 }
-
-private val rand = Random()
-fun Int.asRandom() = rand.nextInt(this)
-
-fun <T> List<T>.getRandom() = this[this.size.asRandom()]
-
-fun Int.asRange(start: Int = 1) = (start..this)
