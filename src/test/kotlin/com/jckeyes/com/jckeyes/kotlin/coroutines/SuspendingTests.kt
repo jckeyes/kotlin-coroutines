@@ -15,6 +15,7 @@ import kotlin.coroutines.experimental.suspendCoroutine
 @ExtendWith(TestOutputFormatter::class)
 class SuspendingTests {
 
+
     /**
      * Have a class that's implemented using [Future] or
      * some other async library? You can still leverage
@@ -63,6 +64,22 @@ class SuspendingTests {
         log(meal)
     }
 
+
+    /**
+     * Not all suspending functions will suspend the execution
+     * of a coroutine. This method, for example, will not
+     * suspend as the value is already available.
+     *
+     * In fact, IntelliJ is smart enough to tell you that it
+     * doesn't need to be a suspending function.
+     */
+    suspend fun breakfast() = "🍩"
+
+    @Test
+    fun `non-suspending suspend function`() = runBlocking {
+        val meal = breakfast()
+        log(meal)
+    }
 
     // only the best
     private val gourmet = Gourmet()

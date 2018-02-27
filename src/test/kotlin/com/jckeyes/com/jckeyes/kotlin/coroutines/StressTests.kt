@@ -4,6 +4,7 @@ package com.jckeyes.com.jckeyes.kotlin.coroutines
 
 import com.jckeyes.com.jckeyes.kotlin.common.TestOutputFormatter
 import com.jckeyes.com.jckeyes.kotlin.common.log
+import com.jckeyes.com.jckeyes.kotlin.common.logCollection
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.runBlocking
@@ -24,7 +25,7 @@ class StressTests {
             }
         }
 
-        log(items.map { it.get() })
+        logCollection(items.map { it.get() })
     }
 
     @Test
@@ -36,7 +37,7 @@ class StressTests {
             }
         }
 
-        log(items.map { it.await() })
+        logCollection(items.map { it.await() })
     }
 
 

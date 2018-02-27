@@ -5,8 +5,10 @@ package com.jckeyes.com.jckeyes.kotlin.coroutines
 import com.jckeyes.com.jckeyes.kotlin.common.TestOutputFormatter
 import com.jckeyes.com.jckeyes.kotlin.common.getRandom
 import com.jckeyes.com.jckeyes.kotlin.common.log
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.run
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.io.File
@@ -59,7 +61,7 @@ class AsyncTests {
         log(a.await(), b.await(), sum.await())
     }
 
-
+    
     // All the kids are talking about it
     private fun randomoji(): String {
         val emojiPath = this.javaClass.getResource("/emojis.txt").path

@@ -8,7 +8,7 @@ fun <T> List<T>.getRandom() = this[this.size.asRandom()]
 
 fun log(a: String, b: String, sum: String) = println("$a + $b = $sum")
 fun log(message: String) = println("$message : $thread")
-fun log(items: Collection<Any>) = items.groupingBy { it }.eachCount().forEach {
+fun logCollection(items: Collection<Any>) = items.groupingBy { it }.eachCount().forEach {
     println("${it.key} x ${it.value}")
 }
 
