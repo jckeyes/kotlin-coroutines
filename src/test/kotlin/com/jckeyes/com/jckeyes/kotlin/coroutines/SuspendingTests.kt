@@ -15,6 +15,27 @@ import kotlin.coroutines.experimental.suspendCoroutine
 @ExtendWith(TestOutputFormatter::class)
 class SuspendingTests {
 
+    /**
+     * Have a class that's implemented using [Future] or
+     * some other async library? You can still leverage
+     * the suspending power of coroutines.
+     */
+    class Gourmet {
+        fun order(): Future<String> = supplyAsync {
+            sleep(1000)
+            "🌭"
+        }
+    }
+
+
+
+    /**
+     * As the name suggests, suspend functions have the potential
+     * to suspend the execution of a coroutine. Because of this,
+     * they can only be called from a coroutine or another suspend
+     * function. Here, we're using [suspendCoroutine] to resume
+     * when [Future.get] completes.
+     */
     suspend fun <T> awaitResult(future: Future<T>) = suspendCoroutine<T> {
         it.resume(future.get())
     }
@@ -27,6 +48,11 @@ class SuspendingTests {
     }
 
 
+
+    /**
+     * Even better, we can use extension functions to create an
+     * await method on [Future].
+     */
     suspend fun <T> Future<T>.await() = suspendCoroutine<T> {
         it.resume(this.get())
     }
@@ -37,15 +63,9 @@ class SuspendingTests {
         log(meal)
     }
 
+
+    // only the best
     private val gourmet = Gourmet()
 }
 
 
-class Gourmet {
-
-    fun order(): Future<String> = supplyAsync {
-        sleep(1000)
-        "🌭"
-    }
-
-}
