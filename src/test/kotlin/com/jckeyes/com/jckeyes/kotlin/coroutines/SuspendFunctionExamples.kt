@@ -13,7 +13,7 @@ import java.util.concurrent.Future
 import kotlin.coroutines.experimental.suspendCoroutine
 
 @ExtendWith(TestOutputFormatter::class)
-class SuspendingTests {
+class SuspendFunctionExamples {
 
 
     /**

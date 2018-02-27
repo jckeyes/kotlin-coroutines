@@ -9,8 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith
 import kotlin.coroutines.experimental.buildSequence
 
 @ExtendWith(TestOutputFormatter::class)
-class SequenceTests {
+class SequenceBuilderExamples {
 
+    // We can use coroutine to create sequence builders.
+    // In this case, it's an infinite sequence.
+    //
+    // buildSequence uses the @RestrictSuspension annotation,
+    // which means that we are not able to suspend it any further.
     private val quackers = buildSequence {
         var result = ""
         while (true) {

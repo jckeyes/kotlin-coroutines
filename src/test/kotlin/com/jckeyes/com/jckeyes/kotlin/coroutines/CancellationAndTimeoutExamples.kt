@@ -13,8 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith
 import java.lang.Thread.sleep
 
 @ExtendWith(TestOutputFormatter::class)
-class CancellationAndTimeoutTests {
+class CancellationAndTimeoutExamples {
 
+    // Coroutines are similar to daemon threads.
+    // They do not keep the process alive.
     @Test
     fun `coroutines are like daemon threads`() {
         launch {
@@ -26,6 +28,9 @@ class CancellationAndTimeoutTests {
         cleanPlate()
     }
 
+    // Coroutines can also be cancelled. If looping, however,
+    // it's important to use the isActive flag so that
+    // it can terminate properly
     @Test
     fun `coroutines can be cancelled`() = runBlocking {
         val job = launch {

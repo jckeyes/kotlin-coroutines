@@ -17,8 +17,11 @@ import java.util.concurrent.CompletableFuture
 import kotlin.concurrent.thread
 
 @ExtendWith(TestOutputFormatter::class)
-class AsyncTests {
+class AsyncExamples {
 
+    // Here we have a number of expensive
+    // calls, that are done sequentially.
+    // It's slow.
     @Test
     fun `blocking calls`() {
         val a = randomoji()
@@ -28,6 +31,8 @@ class AsyncTests {
         log(a, b, sum)
     }
 
+    // You could solve this problem with threads,
+    // but please, don't do that.
     @Test
     fun `async threads`() {
         var a: String? = null
@@ -43,6 +48,10 @@ class AsyncTests {
         log(a!!, b!!, sum!!)
     }
 
+    // A better approach, would be to use Futures
+    // and Suppliers. Again, the problem with this is that
+    // we will inevitably have to block in order to get our
+    // results
     @Test
     fun `async supplier`() {
         val a = CompletableFuture.supplyAsync { randomoji() }
@@ -52,6 +61,9 @@ class AsyncTests {
         log(a.get(), b.get(), sum.get())
     }
 
+    // We can avoid this problem using the async coroutine
+    // builder. It returns a Deferred object that has a
+    // suspending await function
     @Test
     fun `async coroutine`() = runBlocking {
         val a = async { randomoji() }
@@ -61,7 +73,7 @@ class AsyncTests {
         log(a.await(), b.await(), sum.await())
     }
 
-    
+
     // All the kids are talking about it
     private fun randomoji(): String {
         val emojiPath = this.javaClass.getResource("/emojis.txt").path
