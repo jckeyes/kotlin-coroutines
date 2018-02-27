@@ -29,9 +29,7 @@ class CancellationAndTimeoutTests {
     @Test
     fun `coroutines can be cancelled`() = runBlocking {
         val job = launch {
-            while (isActive) {
-                eat()
-            }
+            while (isActive) { eat() }
         }
 
         cleanPlate()
