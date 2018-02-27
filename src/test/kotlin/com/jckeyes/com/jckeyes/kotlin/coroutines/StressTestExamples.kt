@@ -34,6 +34,8 @@ class StressTestExamples {
         limitedPoolExecutor.awaitTermination(5, SECONDS)
     }
 
+
+
     // Coroutines can do this work much, much faster. Delay
     // is a suspending function, which means while one coroutine
     // waits, we can move on to process the other.
@@ -50,10 +52,15 @@ class StressTestExamples {
 
 }
 
+
+
+
 // ... a very tiny thread pool
 private val limitedPoolExecutor = Executors.newFixedThreadPool(2) {
     Thread(it).apply { isDaemon = false }
 }
+
+
 
 // This is a coroutine dispatcher. If you need fine grain control over
 // how and where your coroutines are dispatched, there are a number of

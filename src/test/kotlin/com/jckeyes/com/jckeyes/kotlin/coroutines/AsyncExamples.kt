@@ -31,6 +31,8 @@ class AsyncExamples {
         log(a, b, sum)
     }
 
+
+
     // You could solve this problem with threads,
     // but please, don't do that.
     @Test
@@ -48,6 +50,8 @@ class AsyncExamples {
         log(a!!, b!!, sum!!)
     }
 
+
+
     // A better approach, would be to use Futures
     // and Suppliers. Again, the problem with this is that
     // we will inevitably have to block in order to get our
@@ -61,6 +65,8 @@ class AsyncExamples {
         log(a.get(), b.get(), sum.get())
     }
 
+
+
     // We can avoid this problem using the async coroutine
     // builder. It returns a Deferred object that has a
     // suspending await function
@@ -72,6 +78,9 @@ class AsyncExamples {
 
         log(a.await(), b.await(), sum.await())
     }
+
+
+
 
 
     // All the kids are talking about it

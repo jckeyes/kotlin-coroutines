@@ -16,11 +16,9 @@ import kotlin.coroutines.experimental.suspendCoroutine
 class SuspendFunctionExamples {
 
 
-    /**
-     * Have a class that's implemented using [Future] or
-     * some other async library? You can still leverage
-     * the suspending power of coroutines.
-     */
+    // What if you're using a library that's already
+    // implemented using a different async library?
+    // (e.g. Futures)
     class Gourmet {
         fun order(): Future<String> = supplyAsync {
             sleep(1000)
@@ -29,31 +27,23 @@ class SuspendFunctionExamples {
     }
 
 
-
-    /**
-     * As the name suggests, suspend functions have the potential
-     * to suspend the execution of a coroutine. Because of this,
-     * they can only be called from a coroutine or another suspend
-     * function. Here, we're using [suspendCoroutine] to resume
-     * when [Future.get] completes.
-     */
-    suspend fun <T> awaitResult(future: Future<T>) = suspendCoroutine<T> {
-        it.resume(future.get())
+    // We can prevent writing blocking code by creating
+    // a suspending function that waits for the completion
+    // of the call
+    suspend fun awaitOrder(g: Gourmet) = suspendCoroutine<String> {
+        it.resume(g.order().get())
     }
 
     @Test
     fun `suspending function`() = runBlocking {
-        val future = gourmet.order()
-        val meal = awaitResult(future)
+        val meal = awaitOrder(gourmet)
         log(meal)
     }
 
 
 
-    /**
-     * Even better, we can use extension functions to create an
-     * await method on [Future].
-     */
+    // Even better, we can create an suspending extension function
+    // directly off of the Future class
     suspend fun <T> Future<T>.await() = suspendCoroutine<T> {
         it.resume(this.get())
     }
@@ -65,14 +55,13 @@ class SuspendFunctionExamples {
     }
 
 
-    /**
-     * Not all suspending functions will suspend the execution
-     * of a coroutine. This method, for example, will not
-     * suspend as the value is already available.
-     *
-     * In fact, IntelliJ is smart enough to tell you that it
-     * doesn't need to be a suspending function.
-     */
+
+    // Not all suspending functions will suspend the execution
+    // of a coroutine. This method, for example, will not
+    // suspend as the value is already available.
+    //
+    // In fact, IntelliJ is smart enough to tell you that it
+    // doesn't need to be a suspending function.
     suspend fun breakfast() = "🍩"
 
     @Test

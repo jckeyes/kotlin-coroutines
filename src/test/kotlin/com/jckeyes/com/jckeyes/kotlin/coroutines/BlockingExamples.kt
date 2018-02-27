@@ -24,6 +24,8 @@ class BlockingExamples {
         disconnect()
     }
 
+
+
     // We can use another thread to unblock,
     // but we have to block to join
     @Test
@@ -33,6 +35,7 @@ class BlockingExamples {
         disconnect()
         th.join()
     }
+
 
 
     // launch will perform the task in another
@@ -49,6 +52,8 @@ class BlockingExamples {
         }
     }
 
+
+
     // Sequential code is hard to write using threads.
     @Test
     fun `blocking thread`() {
@@ -56,6 +61,8 @@ class BlockingExamples {
         thread { mine() }.join()
         disconnect()
     }
+
+
 
     // runBlocking starts a coroutine on the current
     // thread. As the name suggests, it will block
@@ -68,6 +75,7 @@ class BlockingExamples {
     }
 
 
+
     // If we combine runBlocking with run, we can
     // write sequential code that doesn't block
     @Test
@@ -77,6 +85,9 @@ class BlockingExamples {
         disconnect()
         profit(coins)
     }
+
+
+
 
 
     // Rockets launch, just like coroutines

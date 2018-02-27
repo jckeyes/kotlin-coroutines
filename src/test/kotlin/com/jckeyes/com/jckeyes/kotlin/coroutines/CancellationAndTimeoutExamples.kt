@@ -28,6 +28,8 @@ class CancellationAndTimeoutExamples {
         cleanPlate()
     }
 
+
+
     // Coroutines can also be cancelled. If looping, however,
     // it's important to use the isActive flag so that
     // it can terminate properly
@@ -42,6 +44,10 @@ class CancellationAndTimeoutExamples {
         job.cancelAndJoin()
         cleanPlate()
     }
+
+
+
+
 
     // Drooly face emoji
     private fun eat() {
